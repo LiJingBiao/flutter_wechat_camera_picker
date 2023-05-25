@@ -630,6 +630,8 @@ class CameraPickerState extends State<CameraPicker>
           Navigator.of(context).pop(entity);
           return;
         }
+        await controller.resumePreview();
+        return;
       }
 
       // final bool? isCapturedFileHandled = pickerConfig.onXFileCaptured?.call(
@@ -766,6 +768,9 @@ class CameraPickerState extends State<CameraPicker>
           Navigator.of(context).pop(entity);
           return;
         }
+        Navigator.of(context).pop();
+        // await controller.resumePreview();
+        return;
       }
 
       final bool? isCapturedFileHandled = pickerConfig.onXFileCaptured?.call(
