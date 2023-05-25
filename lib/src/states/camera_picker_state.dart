@@ -619,13 +619,26 @@ class CameraPickerState extends State<CameraPicker>
     try {
       final XFile file = await controller.takePicture();
       await controller.pausePreview();
-      final bool? isCapturedFileHandled = pickerConfig.onXFileCaptured?.call(
-        file,
-        CameraPickerViewType.image,
-      );
-      if (isCapturedFileHandled ?? false) {
-        return;
+      //路由跳转
+      if (pickerConfig.editRoute != null) {
+        final AssetEntity? entity = await Navigator.of(
+          context,
+          rootNavigator: true,
+        ).push<AssetEntity?>(
+            pickerConfig.editRoute?.call(file, 0)! as Route<AssetEntity?>);
+        if (entity != null) {
+          Navigator.of(context).pop(entity);
+          return;
+        }
       }
+
+      // final bool? isCapturedFileHandled = pickerConfig.onXFileCaptured?.call(
+      //   file,
+      //   CameraPickerViewType.image,
+      // );
+      // if (isCapturedFileHandled ?? false) {
+      //   return;
+      // }
       final AssetEntity? entity = await pushToViewer(
         file: file,
         viewType: CameraPickerViewType.image,
@@ -741,6 +754,20 @@ class CameraPickerState extends State<CameraPicker>
         return;
       }
       await controller.pausePreview();
+
+      //自定制路由跳转
+      if (pickerConfig.editRoute != null) {
+        final AssetEntity? entity = await Navigator.of(
+          context,
+          rootNavigator: true,
+        ).push<AssetEntity?>(
+            pickerConfig.editRoute?.call(file, 1)! as Route<AssetEntity?>);
+        if (entity != null) {
+          Navigator.of(context).pop(entity);
+          return;
+        }
+      }
+
       final bool? isCapturedFileHandled = pickerConfig.onXFileCaptured?.call(
         file,
         CameraPickerViewType.video,

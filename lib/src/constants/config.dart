@@ -1,7 +1,7 @@
 // Copyright 2019 The FlutterCandies author. All rights reserved.
 // Use of this source code is governed by an Apache license that can be found
 // in the LICENSE file.
-
+import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,6 +41,7 @@ class CameraPickerConfig {
     this.onEntitySaving,
     this.onError,
     this.onXFileCaptured,
+    this.editRoute,
     this.onMinimumRecordDurationNotMet,
   }) : assert(
           enableRecording == true || onlyEnableRecording != true,
@@ -161,6 +162,8 @@ class CameraPickerConfig {
 
   /// {@macro wechat_camera_picker.XFileCapturedCallback}
   final XFileCapturedCallback? onXFileCaptured;
+  //type 0 照片 1视频
+  final Route<dynamic> Function(XFile file, int type)? editRoute;
 
   /// The callback when the recording is not met the minimum recording duration.
   /// 录制时长未达到最小时长时的回调方法。
