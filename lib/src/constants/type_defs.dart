@@ -59,9 +59,7 @@ typedef EntitySaveCallback = FutureOr<dynamic> Function(
 /// 拍摄照片过程中的自定义错误处理
 /// {@endtemplate}
 typedef CameraErrorHandler = void Function(
-  Object error,
-  StackTrace? stackTrace,
-);
+    Object error, StackTrace? stackTrace, BuildContext? context);
 
 /// {@template wechat_camera_picker.ForegroundBuilder}
 /// Build the foreground/overlay widget with the given [CameraValue].

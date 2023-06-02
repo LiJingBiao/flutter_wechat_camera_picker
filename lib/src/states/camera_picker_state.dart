@@ -353,7 +353,7 @@ class CameraPickerState extends State<CameraPicker>
         realDebugPrint("${stopwatch.elapsed} for config's update.");
         innerController = newController;
       } catch (e, s) {
-        handleErrorWithHandler(e, pickerConfig.onError, s: s);
+        handleErrorWithHandler(e, pickerConfig.onError, s: s, context: context);
       } finally {
         safeSetState(() {});
       }

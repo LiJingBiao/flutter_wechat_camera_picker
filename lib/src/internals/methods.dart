@@ -8,6 +8,8 @@ import 'package:flutter/foundation.dart';
 
 import '../constants/type_defs.dart';
 
+import 'package:flutter/widgets.dart' show BuildContext;
+
 /// Log only in debug mode.
 /// 只在调试模式打印
 void realDebugPrint(dynamic message) {
@@ -20,9 +22,10 @@ void handleErrorWithHandler(
   Object e,
   CameraErrorHandler? handler, {
   StackTrace? s,
+  BuildContext? context,
 }) {
   if (handler != null) {
-    handler(e, s);
+    handler(e, s, context);
     return;
   }
   throw e;
