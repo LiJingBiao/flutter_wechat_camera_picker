@@ -619,6 +619,15 @@ class CameraPickerState extends State<CameraPicker>
     try {
       final XFile file = await controller.takePicture();
       await controller.pausePreview();
+
+      final bool? isCapturedFileHandled = pickerConfig.onXFileCaptured?.call(
+        file,
+        CameraPickerViewType.image,
+      );
+      if (isCapturedFileHandled ?? false) {
+        return;
+      }
+
       //路由跳转
       if (pickerConfig.editRoute != null) {
         final AssetEntity? entity = await Navigator.of(
@@ -634,13 +643,6 @@ class CameraPickerState extends State<CameraPicker>
         return;
       }
 
-      // final bool? isCapturedFileHandled = pickerConfig.onXFileCaptured?.call(
-      //   file,
-      //   CameraPickerViewType.image,
-      // );
-      // if (isCapturedFileHandled ?? false) {
-      //   return;
-      // }
       final AssetEntity? entity = await pushToViewer(
         file: file,
         viewType: CameraPickerViewType.image,
