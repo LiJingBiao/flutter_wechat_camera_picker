@@ -754,6 +754,7 @@ class CameraPickerState extends State<CameraPicker>
     try {
       final XFile file = await controller.stopVideoRecording();
       if (recordStopwatch.elapsed < minimumRecordingDuration) {
+        takePicture();
         pickerConfig.onMinimumRecordDurationNotMet?.call();
         return;
       }
