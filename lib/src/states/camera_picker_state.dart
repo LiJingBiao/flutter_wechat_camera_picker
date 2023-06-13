@@ -922,11 +922,10 @@ class CameraPickerState extends State<CameraPicker>
         nextCameraDescription.lensDirection,
       ),
       onPressed: switchCameras,
-      icon: Icon(
-        Platform.isIOS
-            ? Icons.flip_camera_ios_outlined
-            : Icons.flip_camera_android_outlined,
-        size: 24,
+      icon: Image.asset(
+        'packages/wechat_camera_picker/assets/switch_camera.png',
+        width: 30,
+        height: 30,
       ),
     );
   }

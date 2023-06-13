@@ -16,3 +16,7 @@ dependencies:
   path: ^1.8.0
   photo_manager: ^2.4.0
   video_player: ^2.3.2
+
+flutter:
+  assets:
+    - assets/
