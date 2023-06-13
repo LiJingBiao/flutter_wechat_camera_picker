@@ -771,8 +771,8 @@ class CameraPickerState extends State<CameraPicker>
           Navigator.of(context).pop(entity);
           return;
         }
-        Navigator.of(context).pop();
-        // await controller.resumePreview();
+        // Navigator.of(context).pop();
+        await controller.resumePreview();
         return;
       }
 
