@@ -607,6 +607,9 @@ class CameraPickerState extends State<CameraPicker>
   /// and the camera is not taking pictures.
   /// 仅当初始化成功且相机未在拍照时拍照。
   Future<void> takePicture() async {
+    print("===========================");
+    print("===========================");
+    print("----------开始拍照----------");
     if (!controller.value.isInitialized) {
       handleErrorWithHandler(
         StateError('Camera has not initialized.'),
@@ -618,6 +621,9 @@ class CameraPickerState extends State<CameraPicker>
     }
     try {
       final XFile file = await controller.takePicture();
+      print("===========================");
+      print("===========================");
+      print("----------结束拍照----------");
       await controller.pausePreview();
 
       final bool? isCapturedFileHandled = pickerConfig.onXFileCaptured?.call(
@@ -737,6 +743,9 @@ class CameraPickerState extends State<CameraPicker>
   /// Stop the recording process.
   /// 停止录制视频
   Future<void> stopRecordingVideo() async {
+    print("===========================");
+    print("===========================");
+    print("----------停止录像----------");
     void handleError() {
       recordCountdownTimer?.cancel();
       isShootingButtonAnimate = false;
@@ -754,6 +763,9 @@ class CameraPickerState extends State<CameraPicker>
     try {
       final XFile file = await controller.stopVideoRecording();
       if (recordStopwatch.elapsed < minimumRecordingDuration) {
+        print("===========================");
+        print("===========================");
+        print("----------准备拍照----------");
         takePicture();
         pickerConfig.onMinimumRecordDurationNotMet?.call();
         return;
